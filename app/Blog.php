@@ -2,17 +2,33 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    protected $fillable = ['title', 'des', 'status'];
+    protected $fillable = ['title', 'des', 'image', 'user_id', 'ViewCounts', 'status'];
 
     public static function saveBlogInfo($request){
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $location = 'blog_images/';
+        $img = $location.$imageName;
+        $blo = Blog::where('image', $img)->first();
+        if ($blo) {
+            $da = date('Y-m-d-H-i-s');
+            $imageName = $da.$imageName;
+        }
+        $image->move($location, $imageName);
+
         $blog = new Blog();
-        $blog->title    = $request->title;
-        $blog->des      = $request->des;
-        $blog->status   = $request->status;
+        $blog->user_id      = Auth::user()->id;;
+        $blog->title        = $request->title;
+        $blog->image        = $location.$imageName;
+        $blog->des          = $request->des;
+        $blog->ViewCounts   = 0;
+        $blog->status       = $request->status;
         $blog->save();
     }
 }
