@@ -28,11 +28,15 @@
         <div class="col-md-4 mb-5">
             <div class="card h-100">
                 <div class="card-body">
+                    <div class="card-img-top">
+                        <img src="{{ asset($blog->image) }}" alt="1" style="height: 120px;width: 100px">
+                    </div>
                     <h2 class="card-title">{{ $blog->title }}</h2>
                     <p class="card-text">{{ $blog->des }}</p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary btn-sm">More Info</a>
+                    <a href="{{ route('blog-details', ['id' => $blog->id]) }}" class="btn btn-primary btn-sm">More Info</a>
+                    <p>{{ $blog->ViewCounts }} view</p>
                 </div>
             </div>
         </div>

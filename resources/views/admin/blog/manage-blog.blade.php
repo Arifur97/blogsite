@@ -52,10 +52,10 @@
                                     <td>{{ $blog->des }}</td>
                                     <td><img src="{{ asset($blog->image) }}" alt="" height="80" width="100"/></td>
                                     <td>{{ $blog->status }}</td>
-{{--                                    <td>--}}
-{{--                                        <a href="{{ route('edit-other-blog', ['id' => $blog->id]) }}" class="text-white btn btn-success">Edit</a>|--}}
-{{--                                        |<a href="" id="" class="text-white delete-btn btn btn-danger">Delete</a>--}}
-{{--                                    </td>--}}
+                                    <td>
+                                        <a href="{{ route('edit-blog', ['id' => $blog->id]) }}" class="text-white btn btn-success">Edit</a>|
+                                        |<a href="{{ route('delete-blog', ['id' => $blog->id]) }}" id="" class="text-white delete-btn btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 </tbody>
 

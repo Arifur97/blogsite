@@ -12,4 +12,14 @@ class ProjectController extends Controller
             'blogs' => Blog::where('status', 1)->get()
         ]);
     }
+
+    public function blogDetails($id){
+        $blog = Blog::find($id);
+        $blog->ViewCounts = $blog->ViewCounts+1;
+        $blog->save();
+
+        return view('front.blog.blog-details',[
+            'blog' => Blog::find($id)
+        ]);
+    }
 }
